@@ -5,7 +5,6 @@ const BASE_IMG_URL = "https://image.tmdb.org/t/p/";
 const BASE_IMG_SIZE = "w500";
 
 const useMovieList = (category, page) => {
-  alert("h")
   const [movieList, setMovieList] = React.useState([]);
   React.useEffect(() => {
     const fetchMovie = async () => {
@@ -28,7 +27,6 @@ const useMovieList = (category, page) => {
 
       result.forEach(e => {
         e.poster_path = `${BASE_IMG_URL}${BASE_IMG_SIZE}${e.poster_path}`;
-        console.log(e + "3")
       });
     
       setMovieList(result);

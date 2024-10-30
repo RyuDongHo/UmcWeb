@@ -1,38 +1,46 @@
 import useMovieList from "./api/useMovieList";
 import STYLE from "./style";
 import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { handleNavigation } from "../../../../Shared/model/handleNavigate";
-const MovieList = () => {
-  const navigate = useNavigate();
-  const [page, setPage] = React.useState(1);
-  // page 전환 기능을 넣게 된다면 state로 관리합니다.
+import Movie from "./ui/Movie";
+import { useParams } from "react-router-dom";
+const MovieList = React.memo(() => {
   const { category } = useParams();
-  const [movieList] = useMovieList(category, page);
-  if (!movieList) return null;
+  const [page, setPage] = React.useState(1);
+  const [movieList, loading] = useMovieList(category, page);
+
+  const observer = React.useRef();
+  const lastMovieElementRef = React.useCallback(
+    (node) => {
+      if (loading) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          setPage((prevPage) => prevPage + 1); // 페이지 증가
+        }
+      });
+      if (node) observer.current.observe(node);
+    },
+    [loading]
+  );
+
+  if (loading) return <div>still loading...</div>;
   return (
     <STYLE.MovieList>
       {movieList.map((elem, index) => {
+        // 마지막 아이템에 ref 추가하여 관찰
+        console.log(index + "렌더링");
         return (
-          <STYLE.Movie
-            className="movie"
+          <Movie
+            lastMovieElementRef={index === movieList.length - 1 ? lastMovieElementRef : null}
             key={index}
-            onClick={() => {
-              handleNavigation(navigate, `/movie-detail/${elem.id}`);
-            }}
-          >
-            <STYLE.Thumbnail src={`${elem.poster_path}`} alt="movie poster" />
-            <STYLE.ThumbnailHoverEffectDiv />
-
-            <STYLE.MovieInfo>
-              <p>{elem.title}</p>
-              <p>{elem.release_date}</p>
-            </STYLE.MovieInfo>
-          </STYLE.Movie>
+            data={elem}
+          />
         );
       })}
+      {loading && <div>Loading more movies...</div>}
     </STYLE.MovieList>
   );
-};
+});
+MovieList.displayName= "MovieList"
 
 export default MovieList;

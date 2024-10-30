@@ -10,6 +10,7 @@ import Sidebar from "./ui/Sidebar";
 const Page = () => {
   return (
     <STYLE.Main>
+       {/* main태그 flex적용 되어 있음  */}
       <Sidebar />
       <Routes>
         <Route path="/" element={<Navigate to="/movies/popular" />} />

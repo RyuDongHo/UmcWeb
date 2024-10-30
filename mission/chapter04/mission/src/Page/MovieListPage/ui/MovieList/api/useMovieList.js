@@ -1,39 +1,33 @@
 import React from "react";
-import apiConfig from "../../../../../Shared/config/apiConfig";
+import fetchData from "../../../../../Shared/config/apiConfig";
 const BASE_URL = import.meta.env.VITE_TMDB_BASE_URL;
 const BASE_IMG_URL = "https://image.tmdb.org/t/p/";
 const BASE_IMG_SIZE = "w500";
 
 const useMovieList = (category, page) => {
+  const [loading, setLoading] = React.useState(true);
   const [movieList, setMovieList] = React.useState([]);
   React.useEffect(() => {
     const fetchMovie = async () => {
-      const response = await fetch(
-        `${BASE_URL}/movie/${category}?language=ko-KR&page=${page}`,
-        apiConfig("GET"),
+      let result = await fetchData(
+        "GET",
+        `${BASE_URL}/movie/${category}?language=ko-KR&page=${page}`
       );
-
-      let result = [];
-      const status = response.status;
-      switch (status) {
-        case 200:
-          result = await response.json();
-          break;
-        default:
-          alert("api error");
-          result = null;
-          break;
-      }
       result.results.forEach(e => {
         e.poster_path = `${BASE_IMG_URL}${BASE_IMG_SIZE}${e.poster_path}`;
       });
-    
-      setMovieList(result);
+
+      setMovieList((prevList) => [
+        ...prevList,
+        ...result.results
+      ]);
+
+      setLoading(false);
     };
 
     fetchMovie();
   }, [category, page]);
 
-  return [movieList.results];
+  return [movieList, loading];
 };
 export default useMovieList;
