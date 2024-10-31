@@ -9,19 +9,29 @@ const MovieList = React.memo(() => {
   const [movieList, loading] = useMovieList(category, page);
 
   const observer = React.useRef();
-  const lastMovieElementRef = React.useCallback(
-    (node) => {
-      if (loading) return;
-      if (observer.current) observer.current.disconnect();
-      observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
-          setPage((prevPage) => prevPage + 1); // 페이지 증가
-        }
-      });
-      if (node) observer.current.observe(node);
-    },
-    [loading]
-  );
+  // const lastMovieElementRef = React.useCallback(
+  //   (node) => {
+  //     if (loading) return;
+  //     if (observer.current) observer.current.disconnect();
+  //     observer.current = new IntersectionObserver((entries) => {
+  //       if (entries[0].isIntersecting) {
+  //         setPage((prevPage) => prevPage + 1); // 페이지 증가
+  //       }
+  //     });
+  //     if (node) observer.current.observe(node);
+  //   },
+  //   [loading]
+  // );
+  const lastMovieElementRef = (node) => {
+    if (loading) return;
+    if (observer.current) observer.current.disconnect();
+    observer.current = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        setPage((prevPage) => prevPage + 1); // 페이지 증가
+      }
+    });
+    if (node) observer.current.observe(node);
+  }
 
   if (loading) return <div>still loading...</div>;
   return (
