@@ -1,5 +1,5 @@
 import STYLE from "./style";
-import { handleNavigation } from "../../../Shared/model/handleNavigate";
+import { handleNavigation } from "../../../3_Shared/model/handleNavigate";
 import { useNavigate } from "react-router-dom";
 import { HiOutlineMagnifyingGlass } from "react-icons/hi2";
 import { RiMovie2Line } from "react-icons/ri";

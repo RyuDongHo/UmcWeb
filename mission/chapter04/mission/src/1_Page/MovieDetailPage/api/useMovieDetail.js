@@ -1,5 +1,5 @@
 import React from "react";
-import fetchData from "../../../Shared/config/apiConfig";
+import fetchData from "../../../3_Shared/config/apiConfig";
 const BASE_URL = import.meta.env.VITE_TMDB_BASE_URL;
 const BASE_IMG_URL = "https://image.tmdb.org/t/p/";
 const BASE_IMG_SIZE = "original";

@@ -1,6 +1,6 @@
 import STYLE from "./style";
 import { useNavigate } from "react-router-dom";
-import { handleNavigation } from "../../../../../../Shared/model/handleNavigate";
+import { handleNavigation } from "../../../../../../3_Shared/model/handleNavigate";
 const Movie = (props) => {
   const { lastMovieElementRef, data} = props;
   const { poster_path, title, release_date, id } = data;

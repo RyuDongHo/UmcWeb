@@ -1,4 +1,4 @@
-import Page from "../Page";
+import Page from "../1_Page";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import GlobalStyles from "./globalStyle.js";

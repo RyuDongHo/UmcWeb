@@ -1,5 +1,5 @@
 import STYLE from "./style";
-import { handleNavigation } from "../../../Shared/model/handleNavigate";
+import { handleNavigation } from "../../../3_Shared/model/handleNavigate";
 import logoImg from "./assets/logo.svg";
 import { useNavigate } from "react-router-dom";
 

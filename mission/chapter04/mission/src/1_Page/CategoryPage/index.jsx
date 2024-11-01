@@ -1,4 +1,4 @@
-import { handleNavigation } from "../../Shared/model/handleNavigate";
+import { handleNavigation } from "../../3_Shared/model/handleNavigate";
 import { useNavigate } from "react-router-dom";
 import backgroundImg from "./assets/categoryCardImg";
 import STYLE from "./style";
