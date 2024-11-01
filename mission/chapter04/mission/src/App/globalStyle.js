@@ -27,6 +27,7 @@ const GlobalStyles = createGlobalStyle`
   }
   ///////////////////////////////////////////////////////////////// reset
   ///////////////////////////////////////////////////////////////// custom style of project
+  
   *{
     color: ${({ theme }) => theme.color}
   }
@@ -40,7 +41,23 @@ const GlobalStyles = createGlobalStyle`
   main{
     flex-grow: 1;
   }
+  h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+  }
 
+  h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+  }
+  
+  h3 {
+    font-size: 1.17em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+  }
   ///////////////////////////////////////////////////////////////// custom style of project
 `;
 
