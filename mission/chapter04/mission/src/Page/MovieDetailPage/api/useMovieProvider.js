@@ -1,25 +1,31 @@
-// `${BASE_URL}/movie/${id}/watch/providers`,
 import React from "react";
 import fetchData from "../../../Shared/config/apiConfig";
 const BASE_URL = import.meta.env.VITE_TMDB_BASE_URL;
 const BASE_IMG_URL = "https://image.tmdb.org/t/p/";
-const BASE_IMG_SIZE = "original";
+const BASE_IMG_SIZE = "w185";
 
 const useMovieProvider = (id) => {
-  const [movieProvider, setmovieProvider] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
+  const [movieProvider, setMovieProvider] = React.useState([]);
   React.useEffect(() => {
-    const fetchMovieProvier = async () => {
-      let result = await fetchData(
+    const fetchMovie = async () => {
+      let movieProviderResult = await fetchData( // 영화 제작진
         "GET",
-        `${BASE_URL}/movie/${id}/watch/providers`
+        `${BASE_URL}/movie/${id}/credits?language=ko-KR`
       );
 
-      console.log(result);
-      setmovieProvider(result);
+      movieProviderResult.cast.forEach((element) => {
+        element.profile_path = `${BASE_IMG_URL}${BASE_IMG_SIZE}${element.profile_path}`
+      });
+      movieProviderResult.crew.forEach((element) => {
+        element.profile_path = `${BASE_IMG_URL}${BASE_IMG_SIZE}${element.profile_path}`
+      });
+      setMovieProvider(movieProviderResult);
+      setLoading(false);
     };
 
-    fetchMovieProvier();
+    fetchMovie();
   }, [id]);
-  return [movieProvider];
+  return [movieProvider, loading];
 };
 export default useMovieProvider;

@@ -6,16 +6,17 @@ const BASE_IMG_SIZE = "original";
 
 const useMovieDetail = (id) => {
   const [loading, setLoading] = React.useState(true);
-  const [movieDetail, setmovieDetail] = React.useState([]);
+  const [movieDetail, setMovieDetail] = React.useState([]);
   React.useEffect(() => {
     const fetchMovie = async () => {
-      let result = await fetchData(
+      let movieDetailResult = await fetchData( // 영화 정보
         "GET",
         `${BASE_URL}/movie/${id}?language=ko-KR`
       );
 
-      result.backdrop_path = `${BASE_IMG_URL}${BASE_IMG_SIZE}${result.backdrop_path}`;
-      setmovieDetail(result);
+      movieDetailResult.backdrop_path = `${BASE_IMG_URL}${BASE_IMG_SIZE}${movieDetailResult.backdrop_path}`;
+      setMovieDetail(movieDetailResult);
+
       setLoading(false);
     };
 
