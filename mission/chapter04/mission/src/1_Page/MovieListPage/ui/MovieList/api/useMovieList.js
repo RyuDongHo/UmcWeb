@@ -24,6 +24,7 @@ const useMovieList = (category, page) => {
       // }
       setMovieList((prevList) => [...prevList, ...result.results]);
       setLoading(false);
+      console.log(page, "page")
     };
 
     fetchMovie();
