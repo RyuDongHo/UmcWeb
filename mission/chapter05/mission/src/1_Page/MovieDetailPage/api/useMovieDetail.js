@@ -1,5 +1,5 @@
 import React from "react";
-import fetchData from "../../../3_Shared/config/apiConfig";
+import {TMDB_fetchRequest} from "../../../3_Shared/config/apiConfig";
 const BASE_URL = import.meta.env.VITE_TMDB_BASE_URL;
 const BASE_IMG_URL = "https://image.tmdb.org/t/p/";
 const BASE_IMG_SIZE = "original";
@@ -9,9 +9,12 @@ const useMovieDetail = (id) => {
   const [movieDetail, setMovieDetail] = React.useState([]);
   React.useEffect(() => {
     const fetchMovie = async () => {
-      let movieDetailResult = await fetchData( // 영화 정보
+      let movieDetailResult = await TMDB_fetchRequest(
+        // 영화 정보
         "GET",
-        `${BASE_URL}/movie/${id}?language=ko-KR`
+        `${BASE_URL}/movie/${id}?language=ko-KR`,
+        null,
+        true
       );
 
       movieDetailResult.backdrop_path = `${BASE_IMG_URL}${BASE_IMG_SIZE}${movieDetailResult.backdrop_path}`;

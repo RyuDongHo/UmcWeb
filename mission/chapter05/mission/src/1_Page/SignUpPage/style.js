@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const STYLE = {
-  LoginForm: styled.form`
+  SignUpForm: styled.form`
     width: 100%;
     display: flex;
     flex-direction: column;

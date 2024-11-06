@@ -1,20 +1,20 @@
 import STYLE from "./style";
 import React from "react";
-import { pwRegex, idRegexMsg } from "../const/regex";
+import { idRegex, idRegexMsg } from "../const/regex";
 
 const IdInput = () => {
+  console.log("render")
   const [validate, setValidate] = React.useState(0); // 0 = no input, -1 = validation false, 1 = validation pass
   
-  let input = React.useRef();
-
+  let input = React.useRef({value: ""});
   const handleInputChange = () => {
     const inputValue = input.current.value;
     if (inputValue.length === 0) {
-      setValidate(0);
-    } else if (!pwRegex.test(inputValue)) {
-      setValidate(-1);
+      validate != 0 && setValidate(0);
+    } else if (!idRegex.test(inputValue)) {
+      validate != -1 && setValidate(-1);
     } else {
-      setValidate(1);
+      validate != 1 && setValidate(1);
     }
   };
 
@@ -28,8 +28,7 @@ const IdInput = () => {
   return (
     <STYLE.Container>
       <STYLE.Input
-      type={'id'}
-        placeholder="PW를 입력하세요"
+        placeholder="ID를 입력하세요"
         ref={input}
         onChange={handleInputChange}
         required
