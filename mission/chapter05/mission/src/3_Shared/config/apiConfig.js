@@ -3,7 +3,6 @@ const API_TOKEN = import.meta.env.VITE_TMDB_API_TOKEN;
 const handleStatus = async (response) => {
   switch (response.status) {
     case 200:
-      return await response.json();
     case 201:
       return await response.json();
     default:
