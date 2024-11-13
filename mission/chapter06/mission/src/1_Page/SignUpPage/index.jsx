@@ -52,7 +52,7 @@ const SignUpPage = () => {
         />
         <Input.InputErrMsg>{errors.passwordCheck?.message}</Input.InputErrMsg>
       </Input.Container>
-      <Input.SubmitInput type="submit" value={"로그인"} disabled={!isValid}/>
+      <Input.SubmitInput type="submit" value={"회원가입"} disabled={!isValid}/>
     </STYLE.SignUpForm>
   );
 };

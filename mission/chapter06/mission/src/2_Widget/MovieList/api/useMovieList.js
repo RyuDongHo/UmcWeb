@@ -6,13 +6,17 @@ const BASE_IMG_URL = "https://image.tmdb.org/t/p/";
 const BASE_IMG_SIZE = "w500";
 
 const useMovieList = (category, page, isSearch) => {
-  const [loading, setLoading] = React.useState(true);
+  const [loading, setLoading] = React.useState(false);
   const [movieList, setMovieList] = React.useState([]);
   const [lastCategory, setLastCategory] = React.useState(null); // 이전 카테고리 추적
   const [lastIsSearch, setLastIsSearch] = React.useState(null); // 이전 검색 상태 추적
 
   React.useEffect(() => {
-    if (page > 500) return; // API 제한 페이지 초과 방지
+    console.log(loading)
+    if (category === "" || page > 500) {
+      setLoading(false);
+      return;
+    }
 
     // 검색어 또는 카테고리가 변경되었을 때 데이터 초기화
     if (category !== lastCategory || isSearch !== lastIsSearch) {
@@ -23,6 +27,7 @@ const useMovieList = (category, page, isSearch) => {
 
     const fetchMovies = async () => {
       try {
+        setLoading(true);
         let url;
         if (isSearch) {
           url = `${BASE_URL}/search/movie?query=${encodeURIComponent(
@@ -40,10 +45,11 @@ const useMovieList = (category, page, isSearch) => {
           poster_path: `${BASE_IMG_URL}${BASE_IMG_SIZE}${movie.poster_path}`,
         }));
 
-        setMovieList((prevList) =>
-          category !== lastCategory || isSearch !== lastIsSearch
-            ? processedResults // 검색어나 카테고리가 변경되면 데이터 덮어쓰기
-            : [...prevList, ...processedResults] // 페이지네이션일 경우 데이터 추가
+        setMovieList(
+          (prevList) =>
+            category !== lastCategory || isSearch !== lastIsSearch
+              ? processedResults // 검색어나 카테고리가 변경되면 데이터 덮어쓰기
+              : [...prevList, ...processedResults] // 페이지네이션일 경우 데이터 추가
         );
       } catch (error) {
         console.error("Failed to fetch movies:", error);

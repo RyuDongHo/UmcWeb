@@ -19,7 +19,12 @@ const useUserInfo = (accessToken) => {
         const refreshToken = getCookie("refreshToken");
         const tokens = await refreshAccessToken(refreshToken);
         accessToken = tokens.accessToken;
-        setCookie("accessToken", accessToken);
+        let expiration = new Date();
+        expiration.setTime(expiration.getTime() + 3600 * 24 * 1000); // 1일 후 만료
+        setCookie("accessToken", accessToken, {
+          path: "/",
+          expires: expiration,
+        });
       }
       const fetchUserInfoResult = await fetchRequest(
         "GET",

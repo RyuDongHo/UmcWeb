@@ -10,6 +10,7 @@ const useMovieDetail = (id) => {
   const [movieDetail, setMovieDetail] = React.useState([]);
   React.useEffect(() => {
     const fetchMovie = async () => {
+      setLoading(true);
       let movieDetailResult = await fetchRequest(
         // 영화 정보
         "GET",
