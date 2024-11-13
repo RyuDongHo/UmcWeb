@@ -4,7 +4,7 @@ import logoImg from "./assets/logo.svg";
 import { useNavigate } from "react-router-dom";
 import { getCookie } from "../../../3_Shared/util/cookies";
 import useUserInfo from "../../../3_Shared/api/useUserInfo";
-import { deleteAllCookies } from "../../../3_Shared/util/cookies";
+import { deleteAllCookies, deleteCookie } from "../../../3_Shared/util/cookies";
 const Navbar = () => {
   const navigate = useNavigate();
   const accessToken = getCookie("accessToken") || null;
@@ -26,7 +26,8 @@ const Navbar = () => {
           <STYLE.SignIn>{(userInfo.email)?.split("@")[0]}</STYLE.SignIn>
           <STYLE.SignUp
             onClick={() => {
-              deleteAllCookies();
+              deleteCookie("accessToken")
+              deleteCookie("refreshToken")
               handleNavigation(navigate, "/");
             }}
           >

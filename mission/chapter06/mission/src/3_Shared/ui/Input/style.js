@@ -21,6 +21,14 @@ export const DefaultInput = styled.input`
   }
 `;
 
+export const LongInput = styled.input`
+  width: 720px;
+  height: 50px;
+  border-radius: 8px;
+  outline: none;
+  color: black;
+`
+
 export const SubmitInput = styled.input`
   width: 360px;
   height: 50px;

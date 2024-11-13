@@ -1,2 +1,2 @@
-import { Container, Label, DefaultInput, SubmitInput, InputErrMsg } from "./style"
-export { Container, Label, DefaultInput, SubmitInput, InputErrMsg }
+import { Container, LongInput, Label, DefaultInput, SubmitInput, InputErrMsg } from "./style"
+export { Container, LongInput, Label, DefaultInput, SubmitInput, InputErrMsg }

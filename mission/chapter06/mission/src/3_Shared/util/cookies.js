@@ -10,15 +10,15 @@ export const getCookie = (name) => {
   return cookies.get(name);
 };
 
+// 모든 쿠키 삭제
 export const deleteAllCookies = () => {
-  const cookies = document.cookie.split(";");
-  cookies.forEach((cookie) => {
-    const cookieName = cookie.split("=")[0];
-    document.cookie = `${cookieName}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;`;
+  const allCookies = cookies.getAll(); // 모든 쿠키 가져오기
+  Object.keys(allCookies).forEach((cookieName) => {
+    cookies.remove(cookieName, { path: "/" }); // 각 쿠키 삭제
   });
 };
 
+// 특정 쿠키 삭제
 export const deleteCookie = (name) => {
-  document.cookie = `${name}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;`;
-  cookies.set(name, '', { path: '/', expires: new Date(0) }); // 과거 날짜로 설정
+  cookies.remove(name, { path: "/" }); // react-cookie의 remove 메서드 사용
 };

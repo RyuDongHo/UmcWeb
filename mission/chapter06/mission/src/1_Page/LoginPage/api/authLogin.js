@@ -15,7 +15,9 @@ const authLogin = (data) => {
       body
     );
     console.log("login", loginResult)
-    let expiration = new Date(Date.now() + 3600 * 24 * 1000);
+    let expiration = new Date();
+    expiration.setTime(expiration.getTime() + 3600 * 24 * 1000); // 1일 후 만료
+
     setCookie("accessToken", loginResult.accessToken, {
       path: "/",
       expires: expiration,
