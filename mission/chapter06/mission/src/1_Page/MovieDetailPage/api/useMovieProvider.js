@@ -1,5 +1,6 @@
 import React from "react";
-import {TMDB_fetchRequest} from "../../../3_Shared/config/apiConfig";
+import {fetchRequest} from "../../../3_Shared/config/apiConfig";
+const API_TOKEN = import.meta.env.VITE_TMDB_API_TOKEN;
 const BASE_URL = import.meta.env.VITE_TMDB_BASE_URL;
 const BASE_IMG_URL = "https://image.tmdb.org/t/p/";
 const BASE_IMG_SIZE = "w185";
@@ -9,11 +10,11 @@ const useMovieProvider = (id) => {
   const [movieProvider, setMovieProvider] = React.useState([]);
   React.useEffect(() => {
     const fetchMovie = async () => {
-      let movieProviderResult = await TMDB_fetchRequest( // 영화 제작진
+      let movieProviderResult = await fetchRequest( // 영화 제작진
         "GET",
         `${BASE_URL}/movie/${id}/credits?language=ko-KR`,
         null,
-        true
+        API_TOKEN
       );
 
       movieProviderResult.cast.forEach((element) => {

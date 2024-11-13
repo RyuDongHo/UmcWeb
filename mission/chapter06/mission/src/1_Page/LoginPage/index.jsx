@@ -1,4 +1,5 @@
 import STYLE from "./style";
+import authLogin from "./api/authLogin";
 import { useForm } from "react-hook-form";
 import {
   emailSchema,
@@ -6,15 +7,20 @@ import {
 } from "../../3_Shared/validation/yupSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Input from "../../3_Shared/ui/Input/";
+import { handleNavigation } from "../../3_Shared/model/handleNavigate";
+import { useNavigate } from "react-router-dom";
 const LoginPage = () => {
+  const navigate = useNavigate();
   const yupSchema = emailSchema.concat(passwordSchema);
   // prettier-ignore
   const { register, handleSubmit, formState: { errors, isValid } } = useForm({
     mode: "onChange", resolver: yupResolver(yupSchema),
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    const loginResult = await authLogin(data);
+    handleNavigation(navigate, "/");
+    console.log(loginResult);
   };
 
   return (

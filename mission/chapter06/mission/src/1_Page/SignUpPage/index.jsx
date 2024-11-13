@@ -3,8 +3,11 @@ import { useForm } from "react-hook-form";
 import { emailSchema, passwordSchema, passwordCheckSchema } from "../../3_Shared/validation/yupSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import authSignUp from "./api/authSignUp";
+import { useNavigate } from "react-router-dom";
+import { handleNavigation } from "../../3_Shared/model/handleNavigate";
 import * as Input from "../../3_Shared/ui/Input/";
 const SignUpPage = () => {
+  const navigate = useNavigate();
   const yupSchema = emailSchema.concat(passwordSchema.concat(passwordCheckSchema));
   // prettier-ignore
   const { register, handleSubmit, formState: { errors, isValid } } = useForm({
@@ -13,6 +16,7 @@ const SignUpPage = () => {
 
   const onSubmit = async (data) => {
     const signUpResult = await authSignUp(data);
+    handleNavigation(navigate, "/login");
     console.log(signUpResult);
   };
   
