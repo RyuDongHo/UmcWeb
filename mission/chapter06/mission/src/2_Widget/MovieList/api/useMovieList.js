@@ -12,7 +12,6 @@ const useMovieList = (category, page, isSearch) => {
   const [lastIsSearch, setLastIsSearch] = React.useState(null); // 이전 검색 상태 추적
 
   React.useEffect(() => {
-    console.log(loading)
     if (category === "" || page > 500) {
       setLoading(false);
       return;

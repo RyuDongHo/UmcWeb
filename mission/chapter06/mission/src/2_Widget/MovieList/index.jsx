@@ -41,7 +41,7 @@ const MovieList = () => {
             />
           );
         })}
-        {(loading && !!keyword) && (
+        {(loading) && (
         <SkeletonContainer>
         {new Array(30).fill(null).map((_, index) => (
           <CardSkeleton key={index} />
