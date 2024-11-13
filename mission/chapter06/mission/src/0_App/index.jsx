@@ -11,10 +11,8 @@ function App() {
     <ThemeProvider theme={theme.defaultTheme}>
       <GlobalStyles />
       <BrowserRouter>
-        <STYLE.AppContainer>
           <Navbar />
           <Page />
-        </STYLE.AppContainer>
       </BrowserRouter>
     </ThemeProvider>
   );
