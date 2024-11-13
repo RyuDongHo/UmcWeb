@@ -20,7 +20,7 @@ const useTodoList = () => {
   };
   // todo list 버튼 이벤트 관리
   const handleTodoListBtn = (event, idx, contentRef) => {
-    const tempList = [...todoList];
+    let tempList = JSON.parse(JSON.stringify(todoList));
     const id = event.target.id;
     switch (id) {
       // 삭제 버튼
