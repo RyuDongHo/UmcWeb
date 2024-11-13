@@ -14,6 +14,7 @@ const authLogin = (data) => {
       `${BASE_URL}/auth/login`,
       body
     );
+    console.log("login", loginResult)
     let expiration = new Date(Date.now() + 3600 * 24 * 1000);
     setCookie("accessToken", loginResult.accessToken, {
       path: "/",

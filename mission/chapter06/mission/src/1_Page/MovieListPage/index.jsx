@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import MovieList from "./ui/MovieList";
+import MovieList from "../../2_Widget/MovieList";
 
 const MovieListPage = () => {
   const {category} = useParams();

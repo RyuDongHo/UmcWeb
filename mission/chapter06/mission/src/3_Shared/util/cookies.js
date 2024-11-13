@@ -19,5 +19,6 @@ export const deleteAllCookies = () => {
 };
 
 export const deleteCookie = (name) => {
+  document.cookie = `${name}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;`;
   cookies.set(name, '', { path: '/', expires: new Date(0) }); // 과거 날짜로 설정
 };
